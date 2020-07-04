@@ -1,0 +1,213 @@
+---
+title: "Project-5 Markdown"
+author: "Vishal Balaji"
+date: 2020-04-29
+output: 
+  html_notebook:
+    theme: readable
+    toc: true
+    toc_float: true
+    highlight: kate
+  pdf_document: default
+---
+
+```{r setup, include = FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("F:/Google Drive/Classes/2020 Spring/data analysis")
+imageDirectory <- "images"
+```
+
+
+## Preliminaries
+
+```{r libs, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+```{r functions, include = FALSE}
+saveInImageDirectory <- function(filename){
+  imageFile <- file.path(imageDirectory, filename)
+  ggsave(imageFile, width = 30, height = 20, units = "cm", dpi = 300)
+}
+```
+
+
+## Data
+This code below imports the data with the proper column data type.
+```{r import}
+tuitionData <- read_csv("Data/Tuition.csv", 
+                        col_types = cols(
+                          Name = col_character(), 
+                          Location = col_character(), 
+                          `In-State Tuition` = col_double(), 
+                          `Out-of-State Tuition` = col_double(), 
+                          Type = col_factor()
+                        ))
+```
+The data is then mutated to include three new columns:    
+
+* `Classification` is of type factor containing three levels:
+  + College
+  + University
+  + Community College
+  
+  This is done by comparing the insitiution name and extracting the classification which is then converted into a factor. All insitutions that do not have any of the classification in their `name` will have an "NA" factor. This will be changed into a factor of "College"
+
+* `State` is of type factor containing 45 levels, each level represents a state
+* `Location_print` is of type character which contains the `Location` with proper capitalization
+
+```{r data-formatting}
+tuitionData <- tuitionData %>% 
+  mutate(
+    Classification = parse_factor(
+      str_extract(tuitionData$Name, "College|University|Community College")
+      ),
+    State = parse_factor(str_extract(tuitionData$Location, '\\S+$')),
+    Location_print = 
+      str_c(str_to_title(sub("(,).*", "", tuitionData$Location)), 
+            str_extract(tuitionData$Location, '\\S+$'), 
+            sep = ", "
+            )
+  )
+tuitionData$Classification <- fct_explicit_na(tuitionData$Classification, "College")
+
+```
+
+
+## Colleges in Top 10
+
+This table shows the colleges that are in the list of top 10 instituitons with the highest in-state tuition
+
+```{r top-10}
+tuitionData %>% 
+  top_n(10, `In-State Tuition`) %>%
+  filter(Classification == "College") %>%
+  select(Name, Type, `In-State Tuition`)
+```
+
+
+## In-State vs Out-Of-State 
+
+This code shows the In-State vs Out-Of-State tuition difference for private colleges
+
+```{r inVsOutDiff}
+tuitionDifference <- tuitionData %>% 
+  mutate(
+    Tuition_Diff = `In-State Tuition` - `Out-of-State Tuition`
+  ) %>%
+  filter(Type == "Private") %>%
+  select(Name, Type, `Tuition_Diff`)
+tuitionDifference
+```
+
+
+## Lower tuition than Millsaps
+
+This section finds the private colleges that have lower tuition than millsaps
+
+```{r lowerThanMillsaps}
+millsapsTuition <- tuitionData %>% filter(str_detect(tuitionData$Name, "Millsaps"))
+
+lowerThanMillsaps <- tuitionData %>%
+  filter(Type == "Private" & Classification == "College") %>%
+  filter(`In-State Tuition` < millsapsTuition$`In-State Tuition`, `Out-of-State Tuition` < millsapsTuition$`Out-of-State Tuition`)
+lowerThanMillsaps
+```
+
+
+## Mean In-state tuition by state
+
+This section finds the average (mean) in-state tuition for private colleges by state
+
+```{r meanInStateTuition}
+inStateTuition_byState <- tuitionData %>% 
+  group_by(State) %>% 
+  summarise(
+    `In-State Tuition` = mean(`In-State Tuition`, na.rm = TRUE)
+    ) %>% 
+  arrange(desc(`In-State Tuition`))
+inStateTuition_byState
+```
+
+
+### Mississippi's rank
+
+This section finds the rank of Mississippi compared to other states for average in-state tuition. (1 - highest, nth - lowest)
+
+```{r MSRank}
+which(grepl("MS", inStateTuition_byState$State))
+```
+
+
+## Private colleges in Mississippi
+
+```{r MS-priv-coll}
+privateCollegesInMS <- tuitionData %>% 
+  filter(Type == "Private", 
+         Classification == "College",
+         State == "MS"
+         ) %>%
+  arrange(desc(`In-State Tuition`))
+privateCollegesInMS
+```
+
+### Millsaps's rank in Mississippi
+
+This section finds the rank of Millsaps College compared to other private colleges in Mississippi for in-state tuition. (1 - highest, nth - lowest)
+
+```{r millRank}
+which(grepl("Millsaps", privateCollegesInMS$Name))
+```
+
+
+## Bar Graphs
+
+### By state
+The bar graphs shows the in-state tuition of private colleges for Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, and Tennessee.
+
+The function below makes the code tidier and resuable for any state.
+```{r barGraph-singleState-func}
+privateCollegeBarGraph <- function(state_name){
+  tuitionData %>% 
+    filter(Type == "Private", 
+           Classification == "College",
+           State == state_name
+    ) %>% 
+    ggplot(aes(x = Name, y = `In-State Tuition`)) + 
+    theme_minimal() + 
+    theme(plot.title = element_text(color = "grey25", size = 20, face = "bold")) +  
+    geom_bar(stat = "identity", fill = "darkcyan", width = 0.7) +
+    ggtitle(
+      str_c(c("In-state Tution for Private Colleges in", state_name), collapse = " ")
+    ) + 
+    scale_x_discrete(labels = function(x) str_wrap(x, width = 25))
+  #saveInImageDirectory(str_c(c("In-state tuition - ", state_name, ".png"), collapse = ""))
+}
+```
+
+```{r barGraph-singleState, fig.width = 8, fig.height= 4}
+privateCollegeBarGraph("AL")
+privateCollegeBarGraph("AR")
+privateCollegeBarGraph("FL") # No Private Colleges
+privateCollegeBarGraph("GA")
+privateCollegeBarGraph("LA")
+privateCollegeBarGraph("MS")
+privateCollegeBarGraph("TN")
+```
+
+### Selective states
+
+The bar graph below shows the average in-state tuition of private colleges for Alabama, Arkansas, Florida, Georgia, Louisiana, Mississippi, and Tennessee.
+
+```{r barGraph-selStates, fig.width = 8, fig.height= 4}
+selStates = c("AL", "AR", "FL", "GA", "LA", "MS", "TN")
+inStateTuition_byState %>% 
+  filter(
+    State %in% selStates
+  ) %>%
+  ggplot(aes(x = State, y = `In-State Tuition`)) + 
+  theme_minimal() + 
+  theme(plot.title = element_text(color = "grey25", size = 20, face = "bold")) +  
+  geom_bar(stat = "identity", fill = "coral1", width = 0.7) + 
+  ggtitle("Average In-state Tution by State")
+```
