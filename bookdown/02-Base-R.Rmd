@@ -1,0 +1,307 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+# Base R {#baseR}
+
+Before you start, a few important reminders:
+
+- R is case-sensitive. That is, `Statistics` is not the same as `statistics`.
+- Spelling matters.
+  - If you misspell something, R doesn't know what you're asking for.
+  - R doesn't understand social media shortcuts.
+
+
+## Comments
+
+1. The comment character in R is `#`. Each commented line must be preceded by a `#` symbol and anything following a `#` is considered a comment.
+2. There are no block comments in R.
+3. Comments are not evaluated when you run your code.
+4. Two important uses of comments:
+  a) Documenting your syntax.
+  b) Excluding problematic lines of code when debugging When debugging, commenting out parts of your code, rather than deleting them, will save you tons of time.
+5. The shortcut for commenting/uncommenting a line is ctrl+shift+c or cmd+shift+c 
+
+  
+```{r comments, message=FALSE, warning=FALSE, eval=FALSE}
+# This is a comment
+## This is also a comment
+######################### This too is a comment
+
+# This is an example of a
+# multiline comment
+```
+
+
+
+## Working Directory
+
+Every R session is associated with a 'working directory'. The working directory is the directory that R will use to read or write data objects to or from disk.
+
+You must specify the directory where your files are located.
+Use `setwd()` to do this.  
+Note:  Remember to change all `\` to `/`.  Also, remember to enclose in quotes.
+
+You can also go to *Session -> Set Working Directory -> Choose directory...* to set the working directory. But it is recommended to use `setwd()` as you leave a written record of which directory you used.
+
+You can check to see what your current working directory is using `getwd()`
+
+```{r wd, message=FALSE, warning=FALSE, eval=FALSE}
+setwd("drive:/parent-folder/child-folder/working-directory-folder")
+setwd("H:/Personal Folders - FacStaff/thompkl1/stats")
+getwd()
+```
+```{r wd-output, echo=FALSE}
+print("H:/Personal Folders - FacStaff/thompkl1/stats")
+```
+
+Above is the output of `getwd()` and this output is logged in the console. 
+
+
+
+## Expressions 
+
+The simplest expressions are constants.
+ 
+```{r expressions-1}
+ 4
+ "cat"
+ 10:20
+```
+ 
+ 
+Expressions may include operators. You will learn about the math operators in more detail in the *operators* section \@ref(math-opr).
+
+```{r expressions-2}
+ 3 + 2
+ 3 - 2
+ 3 * 2
+ 3 / 2
+ 3^2
+```
+ 
+ 
+The `:` is an operator.
+```{r special-opr}
+2:6
+```
+ 
+Anything that happens in R is a function. Operators are functions. These are some of the operators in R:
+`+`
+`-`
+`*`
+`/`
+`^`
+`:`
+
+
+
+## Data Objects
+
+Expressions can be assigned to objects by using the *assignment* operator and specifying a name for the object.
+
+Commands in R are made of two parts: Object and Functions.
+
+Objects and functions are separated by the 'assignment' operator `<-`.
+What is to the left of `<-` is "created from" whatever is on the right.
+
+Commands take the form:
+`Object <- Function`
+To do anything useful in R, we need to create objects to hold the data.
+
+```{r objects}
+x1 <- 4
+x2 <- 4 + 5
+x3 <- "cat"
+x4 <- 2:6
+```
+
+All the objects created can be viewed in the environment pane of the RStudio IDE.
+
+
+### Naming rules
+
+Object names **must** begin with a letter
+
+```{r obj-naming-rules}
+my1X <- pi
+my1X
+```
+```{r obj-naming-rules-err, error=TRUE}
+1X <- pi # Uh-oh :(
+```
+
+
+### Assignment
+
+All of these are different methods of assignment. But it is recommended to follow the first method of assignment as it makes the code readable and easy to edit. 
+
+```{r name-conv}
+# The good
+y <- 7
+
+# The bad
+x = 33.33
+
+# The ugly
+"Bob" -> z
+```
+
+Expressions can also include names of existing data objects.
+```{r}
+w <- y
+w
+
+w <- y + 4
+w
+```
+
+
+### print()
+
+Everything that happens in R is a function. The "default" function is print(). The default location of print() is the screen.
+ 
+Evaluating an object name without assignment passes the result to the default print() function, so we see the value on the screen. You might have noticed this done in previous examples.
+
+```{r}
+y
+x
+z
+```
+
+
+### str(), View(), and summary()
+
+Use `str()`, `View()`, and `summary()` functions to explore data objects.
+
+```{r basic-fn-1}
+str(x1)
+summary(x2)
+summary(x3)
+```
+
+The `View()` function invokes a spreadsheet-style data viewer. Note the capital V.
+```{r eval=FALSE}
+View(x3)
+```
+
+
+### typeof(), class(), and help()
+
+Use `typeof()` and `class()` to learn more about objects
+
+```{r basic-fn-2}
+typeof(x2)
+class(x2)
+
+typeof(x3)
+class(x3)
+
+typeof(str)
+class(View)
+```
+
+The `help()` function shows useful information about the function that is passed in the help pane. In this case it shows information about the `typeof()` function.
+
+```{r eval=FALSE}
+help(typeof)
+```
+
+
+### Built-in objects
+
+R has some built-in data objects
+```{r built-in-objs}
+letters
+pi
+```
+
+
+
+## R's Mathematical Operators {#math-opr}
+
+These are the initial values of the variables x and y.
+
+```{r}
+x
+
+y
+```
+
+
+### Addition, Subtraction, Multiplication and Division
+
+```{r math-opr-basic}
+# Addition
+y + x  
+
+# Subtraction
+y - x 
+
+# Multiplication
+y * x 
+
+# Division
+y / x 
+```
+
+
+### Powers and roots
+
+x^n will raise x to the nth power
+ 
+```{r math-ops-pw}
+3^2
+
+y^2 # square y
+y^3 # cube y
+```
+
+```{r}
+sqrt(y) # function that returns square root of its argument
+
+y^.5
+y^(1/2)
+```
+
+For nth roots with n > 2, use fractional exponents
+
+```{r}
+y^(1/3) # cube root of y
+y^(1/4) # quartic root of y
+```
+
+
+### Logarithms and anti-logs
+
+```{r}
+log(y)   # function for natural logarithm
+log10(y) # function for base 10 log
+log2(y)  # function for base 2 log
+```
+
+
+### Other operators
+
+Exponential function:
+```{r}
+exp(x) # function to exponentiate its argument
+```
+Absolute value:
+```{r}
+abs(y) # returns the absolute value of the argument
+```
+Modulo operator: 
+```{r}
+x %% y # remainder after dividing x by y
+x/y
+```
+
+Integer arithmetic:
+```{r}
+7 %/% 3 # drops any decimal value
+7 / 3
+```
+
+ 
+
+

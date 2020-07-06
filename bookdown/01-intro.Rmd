@@ -6,11 +6,18 @@ There are no prerequisites for this class and is especially friendly for non-pro
 
 ## What to expect? {-}
 
+All the information for this course is taken from the book *R for Data Science* [@Wickham2017R]. 
+
 ## Structure of the book {-}
 
 - Prerequisites 
 - Intro
 - Base R
+  - Project 1
 - Data Viz
-- Exploring 
-- wrangling 
+  - Project 2
+- Exploring
+  - Project 3
+- wrangling
+  - Project 4
+- Final Project
