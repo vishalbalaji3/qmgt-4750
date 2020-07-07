@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1.4 Data Objects | QMGT-4750 Collecting and Analyzing Data</title>
+  <meta name="description" content="This book is a compilation and explanation of all the code used for Millsaps College’s QMGT-4750: Collecting and Analyzing Data class." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1.4 Data Objects | QMGT-4750 Collecting and Analyzing Data" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book is a compilation and explanation of all the code used for Millsaps College’s QMGT-4750: Collecting and Analyzing Data class." />
+  <meta name="github-repo" content="vishalbalaji3/QMGT-4750" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1.4 Data Objects | QMGT-4750 Collecting and Analyzing Data" />
+  
+  <meta name="twitter:description" content="This book is a compilation and explanation of all the code used for Millsaps College’s QMGT-4750: Collecting and Analyzing Data class." />
+  
+
+<meta name="author" content="Vishal Balaji" />
+
+
+<meta name="date" content="2020-07-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="1-3-expressions.html"/>
+<link rel="next" href="1-5-math-opr.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">QMGT-4750 Collecting and Analyzing Data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="what-to-expect.html"><a href="what-to-expect.html"><i class="fa fa-check"></i>What to expect?</a></li>
+<li class="chapter" data-level="" data-path="structure-of-the-book.html"><a href="structure-of-the-book.html"><i class="fa fa-check"></i>Structure of the book</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="1-baseR.html"><a href="1-baseR.html"><i class="fa fa-check"></i><b>1</b> Base R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1-1-comments.html"><a href="1-1-comments.html"><i class="fa fa-check"></i><b>1.1</b> Comments</a></li>
+<li class="chapter" data-level="1.2" data-path="1-2-working-directory.html"><a href="1-2-working-directory.html"><i class="fa fa-check"></i><b>1.2</b> Working Directory</a></li>
+<li class="chapter" data-level="1.3" data-path="1-3-expressions.html"><a href="1-3-expressions.html"><i class="fa fa-check"></i><b>1.3</b> Expressions</a></li>
+<li class="chapter" data-level="1.4" data-path="1-4-data-objects.html"><a href="1-4-data-objects.html"><i class="fa fa-check"></i><b>1.4</b> Data Objects</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="1-4-data-objects.html"><a href="1-4-data-objects.html#naming-rules"><i class="fa fa-check"></i><b>1.4.1</b> Naming rules</a></li>
+<li class="chapter" data-level="1.4.2" data-path="1-4-data-objects.html"><a href="1-4-data-objects.html#assignment"><i class="fa fa-check"></i><b>1.4.2</b> Assignment</a></li>
+<li class="chapter" data-level="1.4.3" data-path="1-4-data-objects.html"><a href="1-4-data-objects.html#print"><i class="fa fa-check"></i><b>1.4.3</b> print()</a></li>
+<li class="chapter" data-level="1.4.4" data-path="1-4-data-objects.html"><a href="1-4-data-objects.html#str-view-and-summary"><i class="fa fa-check"></i><b>1.4.4</b> str(), View(), and summary()</a></li>
+<li class="chapter" data-level="1.4.5" data-path="1-4-data-objects.html"><a href="1-4-data-objects.html#typeof-class-and-help"><i class="fa fa-check"></i><b>1.4.5</b> typeof(), class(), and help()</a></li>
+<li class="chapter" data-level="1.4.6" data-path="1-4-data-objects.html"><a href="1-4-data-objects.html#built-in-objects"><i class="fa fa-check"></i><b>1.4.6</b> Built-in objects</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="1-5-math-opr.html"><a href="1-5-math-opr.html"><i class="fa fa-check"></i><b>1.5</b> R’s Mathematical Operators</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="1-5-math-opr.html"><a href="1-5-math-opr.html#addition-subtraction-multiplication-and-division"><i class="fa fa-check"></i><b>1.5.1</b> Addition, Subtraction, Multiplication and Division</a></li>
+<li class="chapter" data-level="1.5.2" data-path="1-5-math-opr.html"><a href="1-5-math-opr.html#powers-and-roots"><i class="fa fa-check"></i><b>1.5.2</b> Powers and roots</a></li>
+<li class="chapter" data-level="1.5.3" data-path="1-5-math-opr.html"><a href="1-5-math-opr.html#logarithms-and-anti-logs"><i class="fa fa-check"></i><b>1.5.3</b> Logarithms and anti-logs</a></li>
+<li class="chapter" data-level="1.5.4" data-path="1-5-math-opr.html"><a href="1-5-math-opr.html#other-operators"><i class="fa fa-check"></i><b>1.5.4</b> Other operators</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">QMGT-4750 Collecting and Analyzing Data</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-objects" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Data Objects</h2>
+<p>Expressions can be assigned to objects by using the <em>assignment</em> operator and specifying a name for the object.</p>
+<p>Commands in R are made of two parts: Object and Functions.</p>
+<p>Objects and functions are separated by the ‘assignment’ operator <code>&lt;-</code>.
+What is to the left of <code>&lt;-</code> is “created from” whatever is on the right.</p>
+<p>Commands take the form:
+<code>Object &lt;- Function</code>
+To do anything useful in R, we need to create objects to hold the data.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="1-4-data-objects.html#cb7-1" aria-hidden="true"></a>x1 &lt;-<span class="st"> </span><span class="dv">4</span></span>
+<span id="cb7-2"><a href="1-4-data-objects.html#cb7-2" aria-hidden="true"></a>x2 &lt;-<span class="st"> </span><span class="dv">4</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span></span>
+<span id="cb7-3"><a href="1-4-data-objects.html#cb7-3" aria-hidden="true"></a>x3 &lt;-<span class="st"> &quot;cat&quot;</span></span>
+<span id="cb7-4"><a href="1-4-data-objects.html#cb7-4" aria-hidden="true"></a>x4 &lt;-<span class="st"> </span><span class="dv">2</span><span class="op">:</span><span class="dv">6</span></span></code></pre></div>
+<p>All the objects created can be viewed in the environment pane of the RStudio IDE.</p>
+<div id="naming-rules" class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Naming rules</h3>
+<p>Object names <strong>must</strong> begin with a letter</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="1-4-data-objects.html#cb8-1" aria-hidden="true"></a>my1X &lt;-<span class="st"> </span>pi</span>
+<span id="cb8-2"><a href="1-4-data-objects.html#cb8-2" aria-hidden="true"></a>my1X</span>
+<span id="cb8-3"><a href="1-4-data-objects.html#cb8-3" aria-hidden="true"></a><span class="co">## [1] 3.141593</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="1-4-data-objects.html#cb9-1" aria-hidden="true"></a>1X &lt;-<span class="st"> </span>pi <span class="co"># Uh-oh :(</span></span>
+<span id="cb9-2"><a href="1-4-data-objects.html#cb9-2" aria-hidden="true"></a><span class="co">## Error: &lt;text&gt;:1:2: unexpected symbol</span></span>
+<span id="cb9-3"><a href="1-4-data-objects.html#cb9-3" aria-hidden="true"></a><span class="co">## 1: 1X</span></span>
+<span id="cb9-4"><a href="1-4-data-objects.html#cb9-4" aria-hidden="true"></a><span class="co">##      ^</span></span></code></pre></div>
+</div>
+<div id="assignment" class="section level3" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Assignment</h3>
+<p>All of these are different methods of assignment. But it is recommended to follow the first method of assignment as it makes the code readable and easy to edit.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="1-4-data-objects.html#cb10-1" aria-hidden="true"></a><span class="co"># The good</span></span>
+<span id="cb10-2"><a href="1-4-data-objects.html#cb10-2" aria-hidden="true"></a>y &lt;-<span class="st"> </span><span class="dv">7</span></span>
+<span id="cb10-3"><a href="1-4-data-objects.html#cb10-3" aria-hidden="true"></a></span>
+<span id="cb10-4"><a href="1-4-data-objects.html#cb10-4" aria-hidden="true"></a><span class="co"># The bad</span></span>
+<span id="cb10-5"><a href="1-4-data-objects.html#cb10-5" aria-hidden="true"></a>x =<span class="st"> </span><span class="fl">33.33</span></span>
+<span id="cb10-6"><a href="1-4-data-objects.html#cb10-6" aria-hidden="true"></a></span>
+<span id="cb10-7"><a href="1-4-data-objects.html#cb10-7" aria-hidden="true"></a><span class="co"># The ugly</span></span>
+<span id="cb10-8"><a href="1-4-data-objects.html#cb10-8" aria-hidden="true"></a><span class="st">&quot;Bob&quot;</span> -&gt;<span class="st"> </span>z</span></code></pre></div>
+<p>Expressions can also include names of existing data objects.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="1-4-data-objects.html#cb11-1" aria-hidden="true"></a>w &lt;-<span class="st"> </span>y</span>
+<span id="cb11-2"><a href="1-4-data-objects.html#cb11-2" aria-hidden="true"></a>w</span>
+<span id="cb11-3"><a href="1-4-data-objects.html#cb11-3" aria-hidden="true"></a><span class="co">## [1] 7</span></span>
+<span id="cb11-4"><a href="1-4-data-objects.html#cb11-4" aria-hidden="true"></a></span>
+<span id="cb11-5"><a href="1-4-data-objects.html#cb11-5" aria-hidden="true"></a>w &lt;-<span class="st"> </span>y <span class="op">+</span><span class="st"> </span><span class="dv">4</span></span>
+<span id="cb11-6"><a href="1-4-data-objects.html#cb11-6" aria-hidden="true"></a>w</span>
+<span id="cb11-7"><a href="1-4-data-objects.html#cb11-7" aria-hidden="true"></a><span class="co">## [1] 11</span></span></code></pre></div>
+</div>
+<div id="print" class="section level3" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> print()</h3>
+<p>Everything that happens in R is a function. The “default” function is print(). The default location of print() is the screen.</p>
+<p>Evaluating an object name without assignment passes the result to the default print() function, so we see the value on the screen. You might have noticed this done in previous examples.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="1-4-data-objects.html#cb12-1" aria-hidden="true"></a>y</span>
+<span id="cb12-2"><a href="1-4-data-objects.html#cb12-2" aria-hidden="true"></a><span class="co">## [1] 7</span></span>
+<span id="cb12-3"><a href="1-4-data-objects.html#cb12-3" aria-hidden="true"></a>x</span>
+<span id="cb12-4"><a href="1-4-data-objects.html#cb12-4" aria-hidden="true"></a><span class="co">## [1] 33.33</span></span>
+<span id="cb12-5"><a href="1-4-data-objects.html#cb12-5" aria-hidden="true"></a>z</span>
+<span id="cb12-6"><a href="1-4-data-objects.html#cb12-6" aria-hidden="true"></a><span class="co">## [1] &quot;Bob&quot;</span></span></code></pre></div>
+</div>
+<div id="str-view-and-summary" class="section level3" number="1.4.4">
+<h3><span class="header-section-number">1.4.4</span> str(), View(), and summary()</h3>
+<p>Use <code>str()</code>, <code>View()</code>, and <code>summary()</code> functions to explore data objects.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="1-4-data-objects.html#cb13-1" aria-hidden="true"></a><span class="kw">str</span>(x1)</span>
+<span id="cb13-2"><a href="1-4-data-objects.html#cb13-2" aria-hidden="true"></a><span class="co">##  num 4</span></span>
+<span id="cb13-3"><a href="1-4-data-objects.html#cb13-3" aria-hidden="true"></a><span class="kw">summary</span>(x2)</span>
+<span id="cb13-4"><a href="1-4-data-objects.html#cb13-4" aria-hidden="true"></a><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span></span>
+<span id="cb13-5"><a href="1-4-data-objects.html#cb13-5" aria-hidden="true"></a><span class="co">##       9       9       9       9       9       9</span></span>
+<span id="cb13-6"><a href="1-4-data-objects.html#cb13-6" aria-hidden="true"></a><span class="kw">summary</span>(x3)</span>
+<span id="cb13-7"><a href="1-4-data-objects.html#cb13-7" aria-hidden="true"></a><span class="co">##    Length     Class      Mode </span></span>
+<span id="cb13-8"><a href="1-4-data-objects.html#cb13-8" aria-hidden="true"></a><span class="co">##         1 character character</span></span></code></pre></div>
+<p>The <code>View()</code> function invokes a spreadsheet-style data viewer. Note the capital V.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="1-4-data-objects.html#cb14-1" aria-hidden="true"></a><span class="kw">View</span>(x3)</span></code></pre></div>
+</div>
+<div id="typeof-class-and-help" class="section level3" number="1.4.5">
+<h3><span class="header-section-number">1.4.5</span> typeof(), class(), and help()</h3>
+<p>Use <code>typeof()</code> and <code>class()</code> to learn more about objects</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="1-4-data-objects.html#cb15-1" aria-hidden="true"></a><span class="kw">typeof</span>(x2)</span>
+<span id="cb15-2"><a href="1-4-data-objects.html#cb15-2" aria-hidden="true"></a><span class="co">## [1] &quot;double&quot;</span></span>
+<span id="cb15-3"><a href="1-4-data-objects.html#cb15-3" aria-hidden="true"></a><span class="kw">class</span>(x2)</span>
+<span id="cb15-4"><a href="1-4-data-objects.html#cb15-4" aria-hidden="true"></a><span class="co">## [1] &quot;numeric&quot;</span></span>
+<span id="cb15-5"><a href="1-4-data-objects.html#cb15-5" aria-hidden="true"></a></span>
+<span id="cb15-6"><a href="1-4-data-objects.html#cb15-6" aria-hidden="true"></a><span class="kw">typeof</span>(x3)</span>
+<span id="cb15-7"><a href="1-4-data-objects.html#cb15-7" aria-hidden="true"></a><span class="co">## [1] &quot;character&quot;</span></span>
+<span id="cb15-8"><a href="1-4-data-objects.html#cb15-8" aria-hidden="true"></a><span class="kw">class</span>(x3)</span>
+<span id="cb15-9"><a href="1-4-data-objects.html#cb15-9" aria-hidden="true"></a><span class="co">## [1] &quot;character&quot;</span></span>
+<span id="cb15-10"><a href="1-4-data-objects.html#cb15-10" aria-hidden="true"></a></span>
+<span id="cb15-11"><a href="1-4-data-objects.html#cb15-11" aria-hidden="true"></a><span class="kw">typeof</span>(str)</span>
+<span id="cb15-12"><a href="1-4-data-objects.html#cb15-12" aria-hidden="true"></a><span class="co">## [1] &quot;closure&quot;</span></span>
+<span id="cb15-13"><a href="1-4-data-objects.html#cb15-13" aria-hidden="true"></a><span class="kw">class</span>(View)</span>
+<span id="cb15-14"><a href="1-4-data-objects.html#cb15-14" aria-hidden="true"></a><span class="co">## [1] &quot;function&quot;</span></span></code></pre></div>
+<p>The <code>help()</code> function shows useful information about the function that is passed in the help pane. In this case it shows information about the <code>typeof()</code> function.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="1-4-data-objects.html#cb16-1" aria-hidden="true"></a><span class="kw">help</span>(typeof)</span></code></pre></div>
+</div>
+<div id="built-in-objects" class="section level3" number="1.4.6">
+<h3><span class="header-section-number">1.4.6</span> Built-in objects</h3>
+<p>R has some built-in data objects</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="1-4-data-objects.html#cb17-1" aria-hidden="true"></a>letters</span>
+<span id="cb17-2"><a href="1-4-data-objects.html#cb17-2" aria-hidden="true"></a><span class="co">##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot;</span></span>
+<span id="cb17-3"><a href="1-4-data-objects.html#cb17-3" aria-hidden="true"></a><span class="co">## [25] &quot;y&quot; &quot;z&quot;</span></span>
+<span id="cb17-4"><a href="1-4-data-objects.html#cb17-4" aria-hidden="true"></a>pi</span>
+<span id="cb17-5"><a href="1-4-data-objects.html#cb17-5" aria-hidden="true"></a><span class="co">## [1] 3.141593</span></span></code></pre></div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="1-3-expressions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="1-5-math-opr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/vishalbalaji3/QMGT-4750/edit/master/bookdown/02-Base-R.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["QMGT-4750.pdf", "QMGT-4750.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
